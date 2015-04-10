@@ -16,7 +16,8 @@ package com.smsys.services;
 
 import org.springframework.stereotype.Service;
 
-import com.smsys.models.AccountInfo;
+import com.smsys.accounts.AccountInfo;
+
 
 @Service
 public class AccountsService {

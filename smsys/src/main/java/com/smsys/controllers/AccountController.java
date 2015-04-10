@@ -15,14 +15,12 @@
 package com.smsys.controllers;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 
-import com.smsys.models.AccountInfo;
+import com.smsys.accounts.AccountInfo;
 import com.smsys.services.AccountsService;
 
 /**

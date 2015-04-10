@@ -12,7 +12,7 @@
  * Licensed Software and Documentation by the Government shall be solely in
  * accordance with the terms of this Agreement.
  */
-package com.smsys.models;
+package com.smsys.accounts;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
