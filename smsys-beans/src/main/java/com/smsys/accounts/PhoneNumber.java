@@ -14,10 +14,15 @@
  */
 package com.smsys.accounts;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document
 public class PhoneNumber {
 
-
+	@Field
     protected String number;
+	@Field
     protected String type;
 
     /**

@@ -14,16 +14,19 @@
  */
 package com.smsys.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smsys.accounts.AccountInfo;
-
+import com.smsys.repositories.AccountRepoHelper;
 
 @Service
 public class AccountsService {
 
+	@Autowired
+	private AccountRepoHelper accountRepo;
+	
 	public String createAccount(final AccountInfo accountInfo){
-		//TODO: Need to integrate with MongoDB to create Account.
-		return String.valueOf(Math.random());
+		return accountRepo.createAdminAccount(accountInfo);
 	}
 }

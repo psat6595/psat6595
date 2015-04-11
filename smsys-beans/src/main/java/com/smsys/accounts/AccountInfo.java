@@ -17,16 +17,27 @@ package com.smsys.accounts;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+@Document(collection="account")
 public class AccountInfo {
 
+	@Field
 	private String accountId;
+	@Field
 	private String parentAccountId;
+	@Field
 	private String name;
+	@Field
 	private Address address;
+	@Field
 	private PhoneNumber primaryPhoneNumber;
+	@Field
 	private PhoneNumber secondaryPhoneNumber;
+	@Field
 	private String adminAccountId;
+	@Field
 	private String accountType;
 
 	/**

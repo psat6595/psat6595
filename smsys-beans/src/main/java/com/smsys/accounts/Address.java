@@ -14,17 +14,28 @@
  */
 package com.smsys.accounts;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+@Document
 public class Address {
 
-
+	@Field
     protected String address1;
-    protected String address2;
-    protected String address3;
-    protected String building;
-    protected String city;
-    protected String country;
-    protected String postalCode;
-    protected String province;
+	@Field
+	protected String address2;
+	@Field
+	protected String address3;
+	@Field
+	protected String building;
+	@Field
+	protected String city;
+	@Field
+	protected String country;
+	@Field
+	protected String postalCode;
+	@Field
+	protected String province;
 
     /**
      * Gets the value of the address1 property.
