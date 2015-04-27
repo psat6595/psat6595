@@ -17,16 +17,17 @@ package com.smsys.accounts;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection="account")
 public class AccountInfo {
 
+	@Id
+    private String id;
 	@Field
 	private String accountId;
-	@Field
-	private String parentAccountId;
 	@Field
 	private String name;
 	@Field
@@ -36,10 +37,28 @@ public class AccountInfo {
 	@Field
 	private PhoneNumber secondaryPhoneNumber;
 	@Field
-	private String adminAccountId;
-	@Field
 	private String accountType;
 
+	/**
+	 * Gets the value of the id property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getId() {
+		return id;
+	}
+	
+	/**
+	 * Gets the value of the id property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public void setId(final String id) {
+		this.id = id;
+	}
+	
 	/**
 	 * Gets the value of the accountId property.
 	 *
@@ -59,27 +78,6 @@ public class AccountInfo {
 	 */
 	public void setAccountId(final String value) {
 		this.accountId = value;
-	}
-
-	/**
-	 * Gets the value of the parentAccountId property.
-	 *
-	 * @return possible object is {@link String }
-	 *
-	 */
-	public String getParentAccountId() {
-		return parentAccountId;
-	}
-
-	/**
-	 * Sets the value of the parentAccountId property.
-	 *
-	 * @param value
-	 *            allowed object is {@link String }
-	 *
-	 */
-	public void setParentAccountId(final String value) {
-		this.parentAccountId = value;
 	}
 
 	/**
@@ -164,22 +162,7 @@ public class AccountInfo {
 	 */
 	public void setSecondaryPhoneNumber(final PhoneNumber value) {
 		this.secondaryPhoneNumber = value;
-	}
-
-	/**
-	 * @return the adminAccountId
-	 */
-	public String getAdminAccountId() {
-		return adminAccountId;
-	}
-
-	/**
-	 * @param adminAccountId
-	 *            the adminAccountId to set
-	 */
-	public void setAdminAccountId(final String adminAccountId) {
-		this.adminAccountId = adminAccountId;
-	}
+	}	
 
 	public String getAccountType() {
 		return accountType;
@@ -196,9 +179,9 @@ public class AccountInfo {
 	 */
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(accountId).append(parentAccountId)
+		return new HashCodeBuilder().append(accountId)
 				.append(name).append(address).append(primaryPhoneNumber)
-				.append(secondaryPhoneNumber).append(adminAccountId).hashCode();
+				.append(secondaryPhoneNumber).hashCode();
 	}
 
 	/*
@@ -219,12 +202,11 @@ public class AccountInfo {
 		}
 		final AccountInfo rhs = (AccountInfo) obj;
 		return new EqualsBuilder().appendSuper(super.equals(obj))
-				.append(accountId, rhs.accountId)
-				.append(parentAccountId, rhs.parentAccountId)
+				.append(accountId, rhs.accountId)				
 				.append(name, rhs.name).append(address, rhs.address)
 				.append(primaryPhoneNumber, rhs.primaryPhoneNumber)
 				.append(secondaryPhoneNumber, rhs.secondaryPhoneNumber)
-				.append(adminAccountId, rhs.adminAccountId).isEquals();
+				.isEquals();
 	}
 
 	/*
@@ -235,11 +217,10 @@ public class AccountInfo {
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("accountId", accountId)
-				.append("parentAccountId", parentAccountId)
 				.append("name", name).append("address", address)
 				.append("primaryPhoneNumber", primaryPhoneNumber)
 				.append("secondaryPhoneNumber", secondaryPhoneNumber)
-				.append("adminAccountId", adminAccountId).toString();
+				.toString();
 	}
 
 }

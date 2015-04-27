@@ -30,9 +30,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.slf4j.ext.XLogger;
-import org.slf4j.ext.XLoggerFactory;
-
+import org.apache.log4j.Logger;
 import com.smsys.accounts.AccountInfo;
 import com.smsys.services.AccountsService;
 
@@ -42,15 +40,14 @@ import com.smsys.services.AccountsService;
  *
  */
 @Controller
-@RequestMapping(value = {"/accounts"})
+@RequestMapping(value = { "/accounts" })
 public class AccountController {
 
-	private static final XLogger logger = XLoggerFactory
-			.getXLogger(AccountController.class);
-
+	private static final Logger logger = Logger
+			.getLogger(AccountController.class);
 	@Autowired
 	private AccountsService accountsService;
-	
+
 	/**
 	 * Create an account on the basis of passed account type. It can be User or
 	 * Admin account.
@@ -67,26 +64,30 @@ public class AccountController {
 	 * @throws URISyntaxException
 	 *             if an invalid URI is created to set in the response headers.
 	 */
-	@RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE,
-        MediaType.TEXT_PLAIN_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
-    public ResponseEntity<AccountInfo> createAccount(
-        @RequestBody final String accountJson,
-        final HttpServletRequest request) {
-        if (StringUtils.isEmpty(accountJson)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+	@RequestMapping(method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public ResponseEntity<AccountInfo> createAccount(
+			@RequestBody final String accountJson,
+			final HttpServletRequest request) {
+		// logs debug message
+		if (logger.isDebugEnabled()) {
+			logger.debug("Create Account call: Begin");
+		}
+		if (StringUtils.isEmpty(accountJson)) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 
-        try {
-        	final AccountInfo accountInfo = new ObjectMapper().readValue(accountJson, AccountInfo.class);
-            
-            final String accountId = accountsService.createAccount(accountInfo);
-            accountInfo.setAccountId(accountId);
-
-            return new ResponseEntity<>(accountInfo, HttpStatus.CREATED);
-        } catch (final IOException exc) {
-            logger.error("Error occured while creating the account:", exc);
-            throw new IllegalArgumentException("Error occured while creating the account:");
-        }
-    }
+		try {
+			final AccountInfo accountInfo = new ObjectMapper().readValue(
+					accountJson, AccountInfo.class);
+			return new ResponseEntity<>(
+					accountsService.createAccount(accountInfo),
+					HttpStatus.CREATED);
+		} catch (final IOException exc) {
+			logger.error("Error occured while creating the account:", exc);
+			throw new IllegalArgumentException(
+					"Error occured while creating the account:");
+		}
+	}
 }

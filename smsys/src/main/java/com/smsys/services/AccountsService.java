@@ -26,7 +26,7 @@ public class AccountsService {
 	@Autowired
 	private AccountRepoHelper accountRepo;
 	
-	public String createAccount(final AccountInfo accountInfo){
+	public AccountInfo createAccount(final AccountInfo accountInfo){
 		return accountRepo.createAdminAccount(accountInfo);
 	}
 }
